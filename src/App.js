@@ -1,26 +1,56 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Route, Switch, Redirect, Link } from "react-router-dom";
+import NewGame from './newGame';
+import Login from './login';
+import Board from './board';
+import { connect } from "react-redux";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  state={
+    game:false,
+  }
+
+  handleGame=()=>{
+    fetch('http://localhost:4000/api/v1/games', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({}),
+    })
+    .then(r=>r.json())
+    .then(data=> {
+      this.setState({
+        game:true
+      })
+      this.props.handleplayers(data)
+    })
+  }
+
+  render(){
+    return(
+      <Switch>
+      <Route exact path="/" render={()=><NewGame state={this.state} handleGame={this.handleGame}/>} />
+      <Route exact path="/player" render={()=><Login/>} />
+      <Route exact path="/board" render={()=><Board/>} />
+    </Switch>
+    )
+  }
 }
 
-export default App;
+function mapStateToProps(state){
+  return{state}
+}
+
+function mapDispatchToProps(dispatch){
+  return{
+    handleplayers: (players) => {
+      dispatch({type: "PLAYERS", data: players})
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
