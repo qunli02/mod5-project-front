@@ -4,6 +4,7 @@ import Field from './field.js'
 import Action from './action.js'
 import { connect } from "react-redux"
 
+
 class board extends React.Component {
 
   componentDidMount(){
@@ -15,7 +16,6 @@ class board extends React.Component {
       <div>
         <Damage/>
         <Field/>
-        <Action/>
       </div>
     )
   }
@@ -24,14 +24,14 @@ class board extends React.Component {
 function msp(state){
   return{
     players: state.players,
-    player: state.player
+    turn: state.turn
   }
 }
 
 function mdp(dispatch){
   return{
     handlePlayer: (player) => {
-      dispatch({type: "SELECTEDPLAYER", data: player})
+      dispatch({type: "SELECTEDTURN", data: player})
     }
   }
 }

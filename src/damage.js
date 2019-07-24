@@ -57,7 +57,7 @@ class damage extends React.Component {
 function msp(state){
   return{
     players: state.players,
-    player: state.player
+    turn: state.turn
   }
 }
 

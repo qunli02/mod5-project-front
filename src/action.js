@@ -22,10 +22,11 @@ class action extends React.Component {
 
 
   render(){
+    // TODO; you need to update PLAYER reducer case because this.props.player is null right now.
+    // <h1>{this.props.player.name} turn</h1><br/>
     console.log(this.props.player);
     return(
       <div>
-        <h1>{this.props.player.name} turn</h1><br/>
         <button type="button" onClick={this.moveNumber} >Move</button><br/>
         <button type="button" disabled onClick={this.attackNumber}>Attack</button><br/>
         <button type="button" disabled >Special</button><br/>
