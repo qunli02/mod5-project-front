@@ -46,17 +46,29 @@ class Login extends React.Component {
     console.log(Math.abs(Math.ceil(Math.random()*6)-Math.ceil(Math.random()*4)));
   }
 
+  // if(!!this.props.player && this.props.turn === this.props.player){
+  //   return(
+  //   <div>
+  //     HP:{this.props.player.character.hp}<br/>
+  //       <button type="button" onClick={this.moveNumber} >Move</button><br/>
+  //       <button type="button" onClick={this.attackNumber} >Attack</button><br/>
+  //       <button type="button">Special</button><br/>
+  //       <button type="button">End trun</button><br/>
+  //   </div>
+  //   )
+  // }else
 
   render(){
     console.log(this.props);
-    if(!!this.props.player){
+    if (!!this.props.player) {
       return(
-      <div>
-        <button type="button" onClick={this.moveNumber} >Move</button><br/>
-        <button type="button" onClick={this.attackNumber} >Attack</button><br/>
-        <button type="button">Special</button><br/>
-        <button type="button">End trun</button><br/>
-      </div>
+        <div>
+          HP:{this.props.player.character.hp}<br/>
+          <button type="button" onClick={this.moveNumber} >Move</button><br/>
+          <button type="button" onClick={this.attackNumber} >Attack</button><br/>
+          <button type="button">Special</button><br/>
+          <button type="button">End trun</button><br/>
+        </div>
       )
     }else{
       return(
@@ -80,7 +92,8 @@ function msp(state){
   return{
     players: state.players,
     room: state.room,
-    player: state.player
+    player: state.player,
+    turn: state.turn
   }
 }
 
