@@ -2,8 +2,9 @@ const defaultState = {
   game:false,
   players:[{name:"none", game:{id:1},character:{name:""}},{name:"none", game:{id:1},character:{name:""}},{name:"none", game:{id:1},character:{name:""}},{name:"none", game:{id:1},character:{name:""}},{name:"none", game:{id:1},character:{name:""}},{name:"none", game:{id:1},character:{name:""}},{name:"none", game:{id:1},character:{name:""}},{name:"none", game:{id:1},character:{name:""}}],
   room:null,
-  player: {id: null},
-  turn:{id: null}
+  player: {id: null, name:"none", game:{id:1}},
+  turn:{id: null},
+  damage: 0
   }
 
 function reducer(prevState = defaultState, action){

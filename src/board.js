@@ -38,7 +38,8 @@ class board extends React.Component {
 function msp(state){
   return{
     players: state.players,
-    turn: state.turn
+    turn: state.turn,
+    field: state.field
   }
 }
 

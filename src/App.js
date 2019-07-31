@@ -11,6 +11,13 @@ class App extends React.Component {
 
   state={
     game:false,
+    loading:true
+  }
+
+  componentDidMount(){
+    this.setState({
+      loading:false
+    })
   }
 
   handleGame=()=>{
@@ -31,35 +38,43 @@ class App extends React.Component {
     })
   }
 
+
   render(){
-    return(
-      <div>
-        <ActionCableConsumer
-          channel={{ channel: 'PlayersChannel', game: this.props.players[0].game.id}}
-          onReceived={event =>{
-            if (event.player.amiaplayer === "player") {
-              this.props.handleCableInfo(event)
-            }else if (event.player.amiaplayer === "turn") {
-              this.props.handleTurn(event)
-            }else if (event.player.amiaplayer === "characterUpdate") {
-              this.props.handleCharacter(event)
-            }
-          }}
-          />
-        <Switch>
-          <Route exact path="/" render={()=><NewGame state={this.state} handleGame={this.handleGame}/>} />
-          <Route exact path="/player" render={()=><Login/>} />
-          <Route exact path="/board" render={()=><Board/>} />
-        </Switch>
-      </div>
-    )
+    if(this.state.loading){
+      return(
+        <div> Loading</div>
+      )
+    }else{
+      return(
+        <div>
+          <ActionCableConsumer
+            channel={{ channel: 'PlayersChannel', game: this.props.players[0].game.id}}
+            onReceived={event =>{
+              if (event.player.amiaplayer === "player") {
+                this.props.handleCableInfo(event)
+              }else if (event.player.amiaplayer === "turn") {
+                this.props.handleTurn(event)
+              }else if (event.player.amiaplayer === "characterUpdate") {
+                this.props.handleCharacter(event)
+              }
+            }}
+            />
+          <Switch>
+            <Route exact path="/" render={()=><NewGame state={this.state} handleGame={this.handleGame}/>} />
+            <Route exact path="/player" render={()=><Login/>} />
+            <Route exact path="/board" render={()=><Board/>} />
+          </Switch>
+        </div>
+      )
+    }
   }
 }
 
 function mapStateToProps(state){
   return{
     players: state.players,
-    room: state.room
+    room: state.room,
+    field: state.field
   }
 }
 
