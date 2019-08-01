@@ -6,6 +6,7 @@ import Login from './login';
 import Board from './board';
 import { ActionCableConsumer } from 'react-actioncable-provider';
 import { connect } from "react-redux";
+import { API_ROOT } from './constants';
 
 class App extends React.Component {
 
@@ -21,7 +22,7 @@ class App extends React.Component {
   }
 
   handleGame=()=>{
-    fetch('http://localhost:4000/api/v1/games', {
+    fetch(`${API_ROOT}/api/v1/games`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

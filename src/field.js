@@ -30,22 +30,22 @@ class Field extends React.Component {
         <div className="field-row bottom-row">
           <div className="field-pair first">
             <div className="field">
-              <img src={require(`./images/${fields[2][0]}.jpg`)} className="field-background" />
-              {allPlayers.filter(player => fields[2].includes(player.character.location)).map(player => <div className="field-players" id={`player-${player.color}`}></div>)}
-            </div>
-            <div className="field">
-              <img src={require(`./images/${fields[3][0]}.jpg`)} className="field-background" />
-              {allPlayers.filter(player => fields[3].includes(player.character.location)).map(player => <div className="field-players" id={`player-${player.color}`}></div>)}
-            </div>
-          </div>
-          <div className="field-pair second">
-            <div className="field">
               <img src={require(`./images/${fields[4][0]}.jpg`)} className="field-background" />
               {allPlayers.filter(player => fields[4].includes(player.character.location)).map(player => <div className="field-players" id={`player-${player.color}`}></div>)}
             </div>
             <div className="field">
               <img src={require(`./images/${fields[5][0]}.jpg`)} className="field-background" />
               {allPlayers.filter(player => fields[5].includes(player.character.location)).map(player => <div className="field-players" id={`player-${player.color}`}></div>)}
+            </div>
+          </div>
+          <div className="field-pair second">
+            <div className="field">
+              <img src={require(`./images/${fields[2][0]}.jpg`)} className="field-background" />
+              {allPlayers.filter(player => fields[2].includes(player.character.location)).map(player => <div className="field-players" id={`player-${player.color}`}></div>)}
+            </div>
+            <div className="field">
+              <img src={require(`./images/${fields[3][0]}.jpg`)} className="field-background" />
+              {allPlayers.filter(player => fields[3].includes(player.character.location)).map(player => <div className="field-players" id={`player-${player.color}`}></div>)}
             </div>
           </div>
         </div>

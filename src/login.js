@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux"
+import { API_ROOT } from './constants';
 
 
 class Login extends React.Component {
@@ -23,7 +24,7 @@ class Login extends React.Component {
   }
 
   handleName=(name)=>{
-    fetch('http://localhost:4000/api/v1/players')
+    fetch(`${API_ROOT}/api/v1/players`)
     .then(r=>r.json())
     .then(data=> {
       let sorted = data.sort((a,b)=>{
@@ -38,7 +39,7 @@ class Login extends React.Component {
       let person = this.props.players.find(player => player.name === "none")
       if(person !== undefined){
         person.name = name
-        fetch(`http://localhost:4000/api/v1/players/${person.id}`, {
+        fetch(`${API_ROOT}/api/v1/players/${person.id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -48,7 +49,7 @@ class Login extends React.Component {
         })
         .then(response => response.json())
         .then(data => {
-          // fetch(`http://localhost:4000/api/v1/characters/${data.character.id}`, {
+          // fetch(`${API_ROOT}/api/v1/characters/${data.character.id}`, {
           //   method: 'PATCH',
           //   headers: {
           //     'Content-Type': 'application/json',
@@ -71,7 +72,7 @@ class Login extends React.Component {
     })
     let location = Math.ceil(Math.random()*6)+Math.ceil(Math.random()*4)
     console.log(location)
-    fetch(`http://localhost:4000/api/v1/characters/${player.character.id}`, {
+    fetch(`${API_ROOT}/api/v1/characters/${player.character.id}`, {
       method: 'PATCH',
       headers: {
           'Content-Type': 'application/json',
@@ -93,7 +94,7 @@ class Login extends React.Component {
     let deadPlayer = playerWithCharacter.filter(singlePlayer=>{
       return singlePlayer.character.hp === 0
     }).length
-    fetch(`http://localhost:4000/api/v1/games/${player.game.id}`, {
+    fetch(`${API_ROOT}/api/v1/games/${player.game.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -109,7 +110,7 @@ class Login extends React.Component {
         })
         let target = this.props.players.find(player => player.id === parseInt(this.state.person))
         let damage = Math.abs(Math.ceil(Math.random()*6)-Math.ceil(Math.random()*4))
-        fetch(`http://localhost:4000/api/v1/characters/${target.character.id}`, {
+        fetch(`${API_ROOT}/api/v1/characters/${target.character.id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -118,7 +119,7 @@ class Login extends React.Component {
           body: JSON.stringify({...target.character,damage:damage}),
         })
         if (damage !== 0){
-          fetch(`http://localhost:4000/api/v1/characters/${player.character.id}`, {
+          fetch(`${API_ROOT}/api/v1/characters/${player.character.id}`, {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json',
@@ -146,7 +147,7 @@ class Login extends React.Component {
 
     }else if (player.character.name === "Valkyrie") {
       let damage = Math.ceil(Math.random()*4)
-      fetch(`http://localhost:4000/api/v1/characters/${this.state.player.character.id}`, {
+      fetch(`${API_ROOT}/api/v1/characters/${this.state.player.character.id}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -162,7 +163,7 @@ class Login extends React.Component {
           special:true
         })
         let target = this.props.players.find(player => player.id === parseInt(this.state.person))
-        fetch(`http://localhost:4000/api/v1/characters/${target.character.id}`, {
+        fetch(`${API_ROOT}/api/v1/characters/${target.character.id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -180,7 +181,7 @@ class Login extends React.Component {
         })
         let target = this.props.players.find(player => player.id === parseInt(this.state.person))
         let damage = Math.ceil(Math.random()*4)
-        fetch(`http://localhost:4000/api/v1/characters/${target.character.id}`, {
+        fetch(`${API_ROOT}/api/v1/characters/${target.character.id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -214,7 +215,7 @@ class Login extends React.Component {
         let target = this.props.players.find(player=>player.id === parseInt(this.state.person))
         let damage =Math.abs(Math.ceil(Math.random()*6)-Math.ceil(Math.random()*4))
         console.log(damage);
-        fetch(`http://localhost:4000/api/v1/characters/${target.character.id}`, {
+        fetch(`${API_ROOT}/api/v1/characters/${target.character.id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -225,7 +226,7 @@ class Login extends React.Component {
         .then(data =>{
           damage =Math.abs(Math.ceil(Math.random()*6)-Math.ceil(Math.random()*4))
           console.log(damage);
-          fetch(`http://localhost:4000/api/v1/characters/${target.character.id}`, {
+          fetch(`${API_ROOT}/api/v1/characters/${target.character.id}`, {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json',
@@ -243,7 +244,7 @@ class Login extends React.Component {
       this.setState({
         special:true
       })
-      fetch(`http://localhost:4000/api/v1/characters/${player.character.id}`, {
+      fetch(`${API_ROOT}/api/v1/characters/${player.character.id}`, {
          method: 'PATCH',
          headers: {
              'Content-Type': 'application/json',
@@ -256,13 +257,31 @@ class Login extends React.Component {
 
   attackNumber=(e)=>{
     e.preventDefault()
-    if(!!this.state.person){
+    let thisPlayer = this.props.players.find(player => player.id === this.props.player.id)
+    let player = this.props.players.find(player=>player.id === parseInt(this.state.person))
+    let fields = thisPlayer.game.field
+    let shortField = thisPlayer.game.field.filter(x => x !== 3 && x !== 5)
+    let thisPlayerLocation = thisPlayer.character.location === 3 ? 2 : thisPlayer.character.location === 5?4:thisPlayer.character.location
+    let targetLocation = player.character.location === 3 ? 2 : player.character.location === 5?4:player.character.location
+    let thisPlayerIndex = shortField.findIndex(x => x === thisPlayerLocation)
+    let targetIndes =shortField.findIndex(x => x === targetLocation)
+    let possible ;
+    if ((thisPlayerIndex ===0 ||thisPlayerIndex ===1)&&(targetIndes===0 || targetIndes=== 1)){
+      let possible = true
+    }else if ((thisPlayerIndex ===2 ||thisPlayerIndex ===3)&&(targetIndes===2 || targetIndes=== 3)) {
+      let possible = true
+    }else if ((thisPlayerIndex ===4 ||thisPlayerIndex ===5)&&(targetIndes===4 || targetIndes=== 5)) {
+      let possible = true
+    }else{
+      let possible = false
+    }
+    debugger
+
+    if(!!this.state.person && possible){
       console.log(this.state.person);
-      let thisPlayer = this.props.players.find(player => player.id === this.props.player.id)
-      let player = this.props.players.find(player=>player.id === parseInt(this.state.person))
       let damage =Math.abs(Math.ceil(Math.random()*6)-Math.ceil(Math.random()*4))
       console.log(damage);
-      fetch(`http://localhost:4000/api/v1/characters/${player.character.id}`, {
+      fetch(`${API_ROOT}/api/v1/characters/${player.character.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -278,8 +297,8 @@ class Login extends React.Component {
       this.setState({
         attack:true
       })
-    }else {
-      alert("Please pick a target")
+    }else{
+      alert("Target Not in range")
     }
   }
 
@@ -295,7 +314,7 @@ class Login extends React.Component {
     }else{
      turn=playerAlive[0]
     }
-    fetch(`http://localhost:4000/api/v1/games/${turn.game.id}`, {
+    fetch(`${API_ROOT}/api/v1/games/${turn.game.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -312,7 +331,7 @@ class Login extends React.Component {
     })
   }
   emiMove=(location, player)=>{
-    fetch(`http://localhost:4000/api/v1/characters/${player.character.id}`, {
+    fetch(`${API_ROOT}/api/v1/characters/${player.character.id}`, {
       method: 'PATCH',
       headers: {
           'Content-Type': 'application/json',
@@ -329,7 +348,7 @@ class Login extends React.Component {
 
   ultraSpecial = (playerId) => {
     let target = this.props.players.find(player =>{return player.id === parseInt(playerId)})
-    fetch(`http://localhost:4000/api/v1/characters/${target.character.id}`, {
+    fetch(`${API_ROOT}/api/v1/characters/${target.character.id}`, {
       method: 'PATCH',
       headers: {
           'Content-Type': 'application/json',
@@ -343,7 +362,7 @@ class Login extends React.Component {
   }
 
   moveAnywhere=(location,player)=>{
-    fetch(`http://localhost:4000/api/v1/characters/${player.character.id}`, {
+    fetch(`${API_ROOT}/api/v1/characters/${player.character.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -359,7 +378,7 @@ class Login extends React.Component {
   weirdWoods=(action, target)=>{
     let targetPlayer = this.props.players.find(player => player.id === target)
     if(action ==="damage"){
-      fetch(`http://localhost:4000/api/v1/characters/${targetPlayer.character.id}`, {
+      fetch(`${API_ROOT}/api/v1/characters/${targetPlayer.character.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -368,7 +387,7 @@ class Login extends React.Component {
         body: JSON.stringify({...targetPlayer.character,damage:2}),
       })
     }else{
-      fetch(`http://localhost:4000/api/v1/characters/${targetPlayer.character.id}`, {
+      fetch(`${API_ROOT}/api/v1/characters/${targetPlayer.character.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -384,7 +403,7 @@ class Login extends React.Component {
 
   hermitEffectdone=(hermit,target)=>{
     let targetPlayer = this.props.players.find(player => player.id === parseInt(target))
-      fetch(`http://localhost:4000/api/v1/characters/${targetPlayer.character.id}`, {
+      fetch(`${API_ROOT}/api/v1/characters/${targetPlayer.character.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -404,7 +423,7 @@ class Login extends React.Component {
     if (player.character.hermit.split(" ")[4] !== player.character.alliance){
       damage=1
     }
-    fetch(`http://localhost:4000/api/v1/characters/${player.character.id}`, {
+    fetch(`${API_ROOT}/api/v1/characters/${player.character.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -417,7 +436,7 @@ class Login extends React.Component {
   blessingHeal=(target)=>{
     let player = this.props.players.find(player=> player.id === parseInt(target))
     let damage = -Math.ceil(Math.random()*6)
-    fetch(`http://localhost:4000/api/v1/characters/${player.character.id}`, {
+    fetch(`${API_ROOT}/api/v1/characters/${player.character.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -431,7 +450,7 @@ class Login extends React.Component {
   }
 
   healing=(player, damage)=>{
-    fetch(`http://localhost:4000/api/v1/characters/${player.character.id}`, {
+    fetch(`${API_ROOT}/api/v1/characters/${player.character.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -507,7 +526,7 @@ class Login extends React.Component {
       ]
       let thisWhiteCard = whiteCard[Math.floor(Math.random()*whiteCard.length)]
       if (Object.keys(thisWhiteCard)[0] === "1"){
-        fetch(`http://localhost:4000/api/v1/games/${thisPlayer.game.id}`, {
+        fetch(`${API_ROOT}/api/v1/games/${thisPlayer.game.id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -800,7 +819,7 @@ class Login extends React.Component {
       return(
         <div>
           <form onSubmit={(e)=>{
-              e.preventDefault()
+              e.preventDefault();
               this.handleName(e.target[0].value)
             }}>
             <label>
