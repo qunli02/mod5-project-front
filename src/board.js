@@ -4,6 +4,7 @@ import Field from './field.js'
 import Action from './action.js'
 import { connect } from "react-redux"
 import "./board.css"
+import { API_ROOT } from './constants';
 
 
 class board extends React.Component {
@@ -12,7 +13,7 @@ class board extends React.Component {
     this.props.handlePlayer(this.props.players[0])
     let turn = this.props.players[0]
     // this.props.handleTurn(turn)
-    fetch(`http://localhost:4000/api/v1/games/${turn.game.id}`, {
+    fetch(`${API_ROOT}/api/v1/games/${turn.game.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

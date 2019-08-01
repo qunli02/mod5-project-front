@@ -3,6 +3,7 @@ import React from 'react'
 import { connect } from "react-redux"
 
 import { Link } from "react-router-dom";
+import "./newgame.css"
 
 class newGame extends React.Component {
 
@@ -10,13 +11,13 @@ class newGame extends React.Component {
     console.log(this.props);
     if (this.props.state.game === false){
       return (
-        <div>
+        <div className="newgame">
             <button className="button" onClick={this.props.handleGame}>New Game</button>
         </div>
       );
     }else if(this.props.players.filter(player=>player.name !== "none").length >3){
       return (
-        <div>
+        <div >
           {this.props.players[0].game.id}<br/>
         {this.props.players.map((player,current) =>{
             return <p key={current}>{player.name}</p>
@@ -26,7 +27,7 @@ class newGame extends React.Component {
       );
     }else{
       return (
-        <div>
+        <div className="room">
           {this.props.players[0].game.id}<br/>
         {this.props.players.map((player,current) =>{
             return <p key={current}>{player.name}</p>
