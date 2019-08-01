@@ -1,0 +1,41 @@
+.field {
+  height: 200px;
+  width: 130px;
+  background-color: grey;
+  margin: 5px;
+  position: relative;
+}
+
+.field-pair{
+  display:flex;
+  border: black 1px solid;
+  width:270px;
+  margin: 5px 32px;
+}
+
+.field-row{
+  display:flex;
+  justify-content: center;
+  /* border: black 1px solid; */
+  /* width: 50% */
+}
+
+.bottom-row{
+  margin-top: 100px;
+  justify-content: space-between;
+}
+
+.second{
+  transform: rotate(120deg);
+}
+
+.first{
+  transform: rotate(240deg);
+}
+
+.field-background{
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+}

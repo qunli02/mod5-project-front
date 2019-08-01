@@ -3,6 +3,7 @@ import Damage from './damage.js'
 import Field from './field.js'
 import Action from './action.js'
 import { connect } from "react-redux"
+import "./board.css"
 
 
 class board extends React.Component {
@@ -27,7 +28,7 @@ class board extends React.Component {
   render(){
     console.log(this.props);
     return(
-      <div>
+      <div className="board">
         <Damage/>
         <Field/>
       </div>

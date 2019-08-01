@@ -1,6 +1,6 @@
 const defaultState = {
   game:false,
-  players:[{name:"none", game:{id:1},character:{name:""}},{name:"none", game:{id:1},character:{name:""}},{name:"none", game:{id:1},character:{name:""}},{name:"none", game:{id:1},character:{name:""}},{name:"none", game:{id:1},character:{name:""}},{name:"none", game:{id:1},character:{name:""}},{name:"none", game:{id:1},character:{name:""}},{name:"none", game:{id:1},character:{name:""}}],
+  players:[{name:"none", game:{id:1},character:{name:"",hp:0,hermit:null}},{name:"none", game:{id:1},character:{name:"",hp:0,hermit:null}},{name:"none", game:{id:1},character:{name:"",hp:0,hermit:null}},{name:"none", game:{id:1},character:{name:"",hp:0,hermit:null}},{name:"none", game:{id:1},character:{name:"",hp:0,hermit:null}},{name:"none", game:{id:1},character:{name:"",hp:0,hermit:null}},{name:"none", game:{id:1},character:{name:"",hp:0,hermit:null}},{name:"none", game:{id:1},character:{name:"",hp:0,hermit:null}}],
   room:null,
   player: {id: null, name:"none", game:{id:1}},
   turn:{id: null},

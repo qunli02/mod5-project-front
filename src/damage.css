@@ -1,0 +1,78 @@
+table, th, td {
+  border: 1px solid black;
+}
+td{
+  width: 200px;
+}
+
+table {
+  table-layout: auto;
+  width: 400px;
+}
+#player-red {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: red;
+  margin-right: 5px;
+}
+#player-blue {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: blue;
+  margin-right: 5px;
+}
+#player-green {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: green;
+  margin-right: 5px;
+}
+#player-yellow {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: yellow;
+  margin-right: 5px;
+}
+
+#player-orange {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: orange;
+  margin-right: 5px;
+}
+#player-teal {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: teal;
+  margin-right: 5px;
+}
+#player-purple {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: purple;
+  margin-right: 5px;
+}
+#player-black {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: black;
+  margin-right: 5px;
+}
+
+.field-players {
+  z-index: 2;
+  position: fixed;
+  border: 2px solid white;
+}
+
+.row {
+  display: flex;
+}

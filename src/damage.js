@@ -1,52 +1,44 @@
 import React from 'react'
-
 import { connect } from "react-redux"
+import "./damage.css"
 
 class damage extends React.Component {
 
+
   render(){
+    const validPlayers = this.props.players.filter(player => player.name !== "none")
+    const players = validPlayers.map(p => {return {damage: p.character.damage, color: p.color}})
+
     return(
       <table>
         <tbody>
         <tr>
-          <th>Damage</th>
+          <th colSpan="2">Damage</th>
         </tr>
-        <tr>
-          <td>0</td>
-          <td>8</td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>9</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>10</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>11</td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>12</td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>13</td>
-        </tr>
-        <tr>
-          <td>6</td>
-          <td>14</td>
-        </tr>
-        <tr>
-          <td>7</td>
-          <td>15</td>
-        </tr>
-        <tr>
-          <td>8</td>
-          <td>16</td>
-        </tr>
+
+
+        {
+          Array.from(Array(8).keys()).map((ele, index) => {
+
+            return (
+              <tr key={index}>
+                <td>{index}
+                <div className="row">
+                  {
+                    players.filter(player => player.damage === index).map(player => <div id={`player-${player.color}`}></div>)
+                  }
+                </div></td>
+                <td>{index +8}
+                  <div className="row">
+                    {
+                      players.filter(player => player.damage === index+8).map(player => <div id={`player-${player.color}`}></div>)
+                    }
+                  </div>
+                </td>
+              </tr>
+            )
+          })
+        }
         </tbody>
         </table>
     )
@@ -56,7 +48,6 @@ class damage extends React.Component {
 function msp(state){
   return{
     players: state.players,
-    turn: state.turn
   }
 }
 
@@ -67,13 +58,3 @@ function mdp(dispatch){
 
 
 export default connect(msp,mdp)(damage);
-
-// <div>
-//   <div style={{backgroundImage: `url(https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80)`}}>
-//     ssdadsd3434<br/>
-//   asdasd
-// </div>
-// <div>
-//   1
-// </div>
-// </div>
