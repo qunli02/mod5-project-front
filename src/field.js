@@ -1,26 +1,63 @@
 import React from 'react'
+import "./field.css"
+import { connect } from "react-redux"
 
 
 class Field extends React.Component {
   render(){
+    let allPlayers = this.props.players.filter(player => player.name !=="none")
+    let realPlayer = this.props.players.find(player => player.name !=="none")
+    let fields=[[2],[4],[6],[8],[9],[10]]
+    if (realPlayer && realPlayer.game.field){
+      fields = realPlayer.game.field.filter(field => field !== 3 && field !== 5)
+      fields = fields.map(field => field === 2?[2,3]:field === 4?[4,5]:[field])
+    }
+
     return(
       <div>
-        <div>
-        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/4478bc05-6740-4374-8ef8-e740fce2a2ad/d1myrli-38076490-e4bf-408e-b259-5b146aff2775.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzQ0NzhiYzA1LTY3NDAtNDM3NC04ZWY4LWU3NDBmY2UyYTJhZFwvZDFteXJsaS0zODA3NjQ5MC1lNGJmLTQwOGUtYjI1OS01YjE0NmFmZjI3NzUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.g8s1UDX_zcxnZ6qoRIXurRltUkbA-OdW2son3URfBJc"/>
-        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/4478bc05-6740-4374-8ef8-e740fce2a2ad/d1myrli-38076490-e4bf-408e-b259-5b146aff2775.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzQ0NzhiYzA1LTY3NDAtNDM3NC04ZWY4LWU3NDBmY2UyYTJhZFwvZDFteXJsaS0zODA3NjQ5MC1lNGJmLTQwOGUtYjI1OS01YjE0NmFmZjI3NzUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.g8s1UDX_zcxnZ6qoRIXurRltUkbA-OdW2son3URfBJc"/>
+        <div className="field-row">
+          <div className="field-pair top-row">
+            <div className="field">
+              <img src={require(`./images/${fields[0][0]}.jpg`)} className="field-background" />
+              {allPlayers.filter(player => fields[0].includes(player.character.location)).map(player => <div className="field-players" id={`player-${player.color}`}></div>)}
+            </div>
+            <div className="field">
+              <img src={require(`./images/${fields[1][0]}.jpg`)} className="field-background" />
+              {allPlayers.filter(player => fields[1].includes(player.character.location)).map(player => <div className="field-players" id={`player-${player.color}`}></div>)}
+            </div>
+          </div>
         </div>
-        <div>
-        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/4478bc05-6740-4374-8ef8-e740fce2a2ad/d1myrli-38076490-e4bf-408e-b259-5b146aff2775.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzQ0NzhiYzA1LTY3NDAtNDM3NC04ZWY4LWU3NDBmY2UyYTJhZFwvZDFteXJsaS0zODA3NjQ5MC1lNGJmLTQwOGUtYjI1OS01YjE0NmFmZjI3NzUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.g8s1UDX_zcxnZ6qoRIXurRltUkbA-OdW2son3URfBJc"/>
-        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/4478bc05-6740-4374-8ef8-e740fce2a2ad/d1myrli-38076490-e4bf-408e-b259-5b146aff2775.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzQ0NzhiYzA1LTY3NDAtNDM3NC04ZWY4LWU3NDBmY2UyYTJhZFwvZDFteXJsaS0zODA3NjQ5MC1lNGJmLTQwOGUtYjI1OS01YjE0NmFmZjI3NzUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.g8s1UDX_zcxnZ6qoRIXurRltUkbA-OdW2son3URfBJc"/>
+        <div className="field-row bottom-row">
+          <div className="field-pair first">
+            <div className="field">
+              <img src={require(`./images/${fields[2][0]}.jpg`)} className="field-background" />
+              {allPlayers.filter(player => fields[2].includes(player.character.location)).map(player => <div className="field-players" id={`player-${player.color}`}></div>)}
+            </div>
+            <div className="field">
+              <img src={require(`./images/${fields[3][0]}.jpg`)} className="field-background" />
+              {allPlayers.filter(player => fields[3].includes(player.character.location)).map(player => <div className="field-players" id={`player-${player.color}`}></div>)}
+            </div>
+          </div>
+          <div className="field-pair second">
+            <div className="field">
+              <img src={require(`./images/${fields[4][0]}.jpg`)} className="field-background" />
+              {allPlayers.filter(player => fields[4].includes(player.character.location)).map(player => <div className="field-players" id={`player-${player.color}`}></div>)}
+            </div>
+            <div className="field">
+              <img src={require(`./images/${fields[5][0]}.jpg`)} className="field-background" />
+              {allPlayers.filter(player => fields[5].includes(player.character.location)).map(player => <div className="field-players" id={`player-${player.color}`}></div>)}
+            </div>
+          </div>
         </div>
-        <div>
-        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/4478bc05-6740-4374-8ef8-e740fce2a2ad/d1myrli-38076490-e4bf-408e-b259-5b146aff2775.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzQ0NzhiYzA1LTY3NDAtNDM3NC04ZWY4LWU3NDBmY2UyYTJhZFwvZDFteXJsaS0zODA3NjQ5MC1lNGJmLTQwOGUtYjI1OS01YjE0NmFmZjI3NzUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.g8s1UDX_zcxnZ6qoRIXurRltUkbA-OdW2son3URfBJc"/>
-        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/4478bc05-6740-4374-8ef8-e740fce2a2ad/d1myrli-38076490-e4bf-408e-b259-5b146aff2775.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzQ0NzhiYzA1LTY3NDAtNDM3NC04ZWY4LWU3NDBmY2UyYTJhZFwvZDFteXJsaS0zODA3NjQ5MC1lNGJmLTQwOGUtYjI1OS01YjE0NmFmZjI3NzUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.g8s1UDX_zcxnZ6qoRIXurRltUkbA-OdW2son3URfBJc"/>
-        </div>
-
       </div>
     )
   }
 }
+function msp(state){
+  return{
+    players: state.players,
+    field: state.field
+  }
+}
 
-export default Field;
+export default connect(msp)(Field);
