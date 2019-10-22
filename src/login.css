@@ -1,0 +1,38 @@
+.outer-color{
+  width: 100vw;
+  height: 100vh;
+}
+.player-data{
+  background-color: white;
+  border: 1px solid black;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  padding: 30px;
+}
+
+.title{
+  font-weight: bold;
+}
+
+.locationTitle{
+  color: black;
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+text{
+  color: white;
+}
+
+label{
+  font-size: 2rem;
+  color: white;
+}
+
+.sign{
+  text-align: center;
+  padding: 100px;
+}

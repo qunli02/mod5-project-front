@@ -1,13 +1,15 @@
 table, th, td {
-  border: 1px solid black;
+  border: 1px solid red;
 }
 td{
-  width: 200px;
+  width: 400px;
+  height: 70px;
 }
 
 table {
   table-layout: auto;
-  width: 400px;
+  width: 500px;
+  color: white;
 }
 #player-red {
   width: 20px;
@@ -69,7 +71,6 @@ table {
 
 .field-players {
   z-index: 2;
-  position: fixed;
   border: 2px solid white;
 }
 

@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux"
 import { API_ROOT } from './constants';
+import "./login.css"
 
 
 class Login extends React.Component {
@@ -14,7 +15,8 @@ class Login extends React.Component {
     attack: false,
     special:false,
     location:null,
-    hermit:""
+    hermit:"",
+    underworld:false
   }
 
   handleTarget= (person)=>{
@@ -43,7 +45,7 @@ class Login extends React.Component {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                'Appect': 'application/json'
+                'Accept': 'application/json'
             },
             body: JSON.stringify({...person}),
         })
@@ -53,7 +55,7 @@ class Login extends React.Component {
           //   method: 'PATCH',
           //   headers: {
           //     'Content-Type': 'application/json',
-          //     'Appect': 'application/json'
+          //     'Accept': 'application/json'
           //   },
           //   body: JSON.stringify({hp:10}),
           // })
@@ -76,7 +78,7 @@ class Login extends React.Component {
       method: 'PATCH',
       headers: {
           'Content-Type': 'application/json',
-          'Appect': 'application/json'
+          'Accept': 'application/json'
       },
       body: JSON.stringify({...player.character,location:location, damage:null}),
     })
@@ -98,7 +100,7 @@ class Login extends React.Component {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        'Appect': 'application/json'
+        'Accept': 'application/json'
       },
       body: JSON.stringify({...player.game, wight:deadPlayer}),
     })
@@ -114,7 +116,7 @@ class Login extends React.Component {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
-            'Appect': 'application/json'
+            'Accept': 'application/json'
           },
           body: JSON.stringify({...target.character,damage:damage}),
         })
@@ -123,7 +125,7 @@ class Login extends React.Component {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json',
-              'Appect': 'application/json'
+              'Accept': 'application/json'
             },
             body: JSON.stringify({...player.character,damage:-2}),
           })
@@ -151,7 +153,7 @@ class Login extends React.Component {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
-            'Appect': 'application/json'
+            'Accept': 'application/json'
         },
         body: JSON.stringify({...player.character,damage:damage}),
       })
@@ -167,7 +169,7 @@ class Login extends React.Component {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
-            'Appect': 'application/json'
+            'Accept': 'application/json'
           },
           body: JSON.stringify({...target.character,damage:7}),
         })
@@ -185,7 +187,7 @@ class Login extends React.Component {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
-            'Appect': 'application/json'
+            'Accept': 'application/json'
           },
           body: JSON.stringify({...target.character,damage:damage}),
         })
@@ -219,7 +221,7 @@ class Login extends React.Component {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
-            'Appect': 'application/json'
+            'Accept': 'application/json'
           },
           body: JSON.stringify({...target.character,damage:damage}),
         }).then(r=>r.json())
@@ -230,7 +232,7 @@ class Login extends React.Component {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json',
-              'Appect': 'application/json'
+              'Accept': 'application/json'
             },
             body: JSON.stringify({...target.character,damage:damage}),
           })
@@ -248,7 +250,7 @@ class Login extends React.Component {
          method: 'PATCH',
          headers: {
              'Content-Type': 'application/json',
-             'Appect': 'application/json'
+             'Accept': 'application/json'
          },
          body: JSON.stringify({...player.character,damage:"allie"}),
        })
@@ -267,15 +269,14 @@ class Login extends React.Component {
     let targetIndes =shortField.findIndex(x => x === targetLocation)
     let possible ;
     if ((thisPlayerIndex ===0 ||thisPlayerIndex ===1)&&(targetIndes===0 || targetIndes=== 1)){
-      let possible = true
+     possible = true
     }else if ((thisPlayerIndex ===2 ||thisPlayerIndex ===3)&&(targetIndes===2 || targetIndes=== 3)) {
-      let possible = true
+     possible = true
     }else if ((thisPlayerIndex ===4 ||thisPlayerIndex ===5)&&(targetIndes===4 || targetIndes=== 5)) {
-      let possible = true
+     possible = true
     }else{
-      let possible = false
+     possible = false
     }
-    debugger
 
     if(!!this.state.person && possible){
       console.log(this.state.person);
@@ -285,7 +286,7 @@ class Login extends React.Component {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          'Appect': 'application/json'
+          'Accept': 'application/json'
         },
         body: JSON.stringify({...player.character,damage:damage}),
       })
@@ -335,7 +336,7 @@ class Login extends React.Component {
       method: 'PATCH',
       headers: {
           'Content-Type': 'application/json',
-          'Appect': 'application/json'
+          'Accept': 'application/json'
       },
       body: JSON.stringify({...player.character,location:location, damage:null}),
     })
@@ -352,7 +353,7 @@ class Login extends React.Component {
       method: 'PATCH',
       headers: {
           'Content-Type': 'application/json',
-          'Appect': 'application/json'
+          'Accept': 'application/json'
       },
       body: JSON.stringify({...target.character,damage:3}),
     })
@@ -366,7 +367,7 @@ class Login extends React.Component {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        'Appect': 'application/json'
+        'Accept': 'application/json'
       },
       body: JSON.stringify({...player.character,location:location, damage:null}),
     })
@@ -377,28 +378,32 @@ class Login extends React.Component {
 
   weirdWoods=(action, target)=>{
     let targetPlayer = this.props.players.find(player => player.id === target)
-    if(action ==="damage"){
-      fetch(`${API_ROOT}/api/v1/characters/${targetPlayer.character.id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Appect': 'application/json'
-        },
-        body: JSON.stringify({...targetPlayer.character,damage:2}),
+    if(target){
+      if(action ==="damage"){
+        fetch(`${API_ROOT}/api/v1/characters/${targetPlayer.character.id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({...targetPlayer.character,damage:2}),
+        })
+      }else{
+        fetch(`${API_ROOT}/api/v1/characters/${targetPlayer.character.id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({...targetPlayer.character,damage:-1}),
+        })
+      }
+      this.setState({
+        location:null
       })
     }else{
-      fetch(`${API_ROOT}/api/v1/characters/${targetPlayer.character.id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Appect': 'application/json'
-        },
-        body: JSON.stringify({...targetPlayer.character,damage:-1}),
-      })
+      alert("please pick targer")
     }
-    this.setState({
-      location:null
-    })
   }
 
   hermitEffectdone=(hermit,target)=>{
@@ -407,7 +412,7 @@ class Login extends React.Component {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          'Appect': 'application/json'
+          'Accept': 'application/json'
         },
         body: JSON.stringify({...targetPlayer.character,hermit:hermit}),
       }).then(r=>r.json())
@@ -427,9 +432,14 @@ class Login extends React.Component {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        'Appect': 'application/json'
+        'Accept': 'application/json'
       },
       body: JSON.stringify({...player.character,damage:damage,hermit:null}),
+    })
+    if(this.state.underworld)
+    this.setState({
+      location: null,
+      underworld: false
     })
   }
 
@@ -440,7 +450,7 @@ class Login extends React.Component {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        'Appect': 'application/json'
+        'Accept': 'application/json'
       },
       body: JSON.stringify({...player.character,damage:damage}),
     })
@@ -454,20 +464,91 @@ class Login extends React.Component {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        'Appect': 'application/json'
+        'Accept': 'application/json'
       },
       body: JSON.stringify({...player.character,damage:damage}),
     })
+    this.setState({
+      location:null,
+      underworld:false
+    })
+  }
+
+  greenCard=()=>{
+    this.setState({
+      location:2,
+      underworld: true
+    })
+  }
+
+  whiteCard=()=>{
+    this.setState({
+      location:6,
+      underworld: true
+    })
+  }
+
+  blackCard=()=>{
+    this.setState({
+      location:8,
+      underworld: true
+    })
+  }
+
+  backEffect =(target,thisPlayer, number)=>{
+    if(number === 1){
+      fetch(`${API_ROOT}/api/v1/characters/${thisPlayer.character.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({...thisPlayer.character,damage:2}),
+      }).then(r=>r.json())
+      .then(data=>{
+        fetch(`${API_ROOT}/api/v1/characters/${target.character.id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({...target.character,damage:2}),
+        })
+      })
+    this.setState({
+      location:null
+    })
+    }else if(number === 2){
+      fetch(`${API_ROOT}/api/v1/characters/${target.character.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({...target.character,damage:2}),
+      }).then(r=>r.json())
+      .then(data=>{
+        fetch(`${API_ROOT}/api/v1/characters/${thisPlayer.character.id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({...thisPlayer.character,damage:-1}),
+        })
+      })
+    }
     this.setState({
       location:null
     })
   }
 
-
   locationEffectdone =()=>{
     this.setState({
-      location:null
+      location:null,
+      underworld: false
     })
+
   }
 
 
@@ -489,8 +570,8 @@ class Login extends React.Component {
       }
       let otherAlivePlayer = alivePlayer.filter(player => player.id !== thisPlayer.id)
       return(
-        <div>
-          Hermit's Cabin:
+        <div className="player-data">
+          <span className="locationTitle">Hermit's Cabin</span>
           <br/>
           {this.state.hermit}
           <br/>
@@ -512,9 +593,11 @@ class Login extends React.Component {
       )
     }else if (this.state.location === 4 || this.state.location === 5) {
       return(
-        <div>
-          Underworld Gate
-          <button type="button" onClick={this.locationEffectdone}></button><br/>
+        <div className="player-data">
+          <span className="locationTitle">Underworld Gate</span> <br/>
+          <button type="button" onClick={this.greenCard}>Green card</button><br/>
+          <button type="button" onClick={this.whiteCard}>white card</button><br/>
+          <button type="button" onClick={this.blackCard}>Black card</button><br/>
         </div>
       )
     }else if (this.state.location === 6) {
@@ -530,21 +613,21 @@ class Login extends React.Component {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
-            'Appect': 'application/json'
+            'Accept': 'application/json'
           },
           body: JSON.stringify({...thisPlayer.game, wight:1}),
         })
         return(
-          <div>
-            Church<br/>
+          <div className="player-data">
+            <span className="locationTitle">Church</span><br/>
           {Object.values(thisWhiteCard)}
             <button type="button" onClick={this.locationEffectdone}>ok</button><br/>
           </div>
         )
       }else if (Object.keys(thisWhiteCard)[0] === "2") {
         return(
-          <div>
-            Church<br/>
+          <div className="player-data">
+            <span className="locationTitle">Church</span><br/>
           {Object.values(thisWhiteCard)}
           <br/>
           {
@@ -560,8 +643,8 @@ class Login extends React.Component {
         )
       }else if (Object.keys(thisWhiteCard)[0] === "3") {
         return(
-          <div>
-            Church<br/>
+          <div className="player-data">
+            <span className="locationTitle">Church</span><br/>
           {Object.values(thisWhiteCard)}
           <br/>
             {
@@ -577,8 +660,8 @@ class Login extends React.Component {
         )
       }else if (Object.keys(thisWhiteCard)[0] === "4") {
         return(
-          <div>
-            Church<br/>
+          <div className="player-data">
+            <span className="locationTitle">Church</span><br/>
           {Object.values(thisWhiteCard)}
             <button type="button" onClick={e=>this.healing(thisPlayer, -2)}>ok</button><br/>
           </div>
@@ -588,8 +671,8 @@ class Login extends React.Component {
     }else if (this.state.location === 7) {
       const locationToName ={2:"Hermit's Cabin", 3:"Hermit's Cabin", 4:"Underworld Gate", 5:"Underworld Gate", 6:"Church", 8:"Cemetery", 9:"Werid woods", 10:"Erstwhile Altar"}
       return(
-        <div>
-          Pick where to go
+        <div className="player-data">
+          <span className="locationTitle">Choose where to go</span>
           <br/><button type="button" onClick={e=>this.moveAnywhere(parseInt(e.target.value),thisPlayer)} value = "2" >Hermit's Cabin</button><br/>
           <button type="button" onClick={e=>this.moveAnywhere(parseInt(e.target.value),thisPlayer)} value = "4" >Underworld Gate</button><br/>
           <button type="button" onClick={e=>this.moveAnywhere(parseInt(e.target.value),thisPlayer)} value = "6" >Church</button><br/>
@@ -599,16 +682,29 @@ class Login extends React.Component {
         </div>
       )
     }else if (this.state.location === 8) {
+      let number = Math.ceil(Math.random()*2)
+      let theBlackCard = ["Bloodthristy Spider:You give 2 points of damage to any character and receive 2 points of damage yoursef","Vampire Bat:You give 2 points of damage to any chatacter and heal 1 point of your own damage"]
+      let otherPlayer= allPlayer.filter(player => player.id !== thisPlayer.id)
       return(
-        <div>
-          Cemetery
-          <button type="button" onClick={this.locationEffectdone}></button><br/>
+        <div className="player-data">
+          <span className="locationTitle">Cemetery</span> <br/>
+          {theBlackCard[number-1]}
+          {
+            alivePlayer.map(player=>{
+              return(
+                <Fragment key={player.id}>
+                  <br/><button type="button" onClick={e=>this.backEffect(player,thisPlayer,number)}>{player.name}</button><br/>
+                </Fragment>
+              )
+            })
+          }
         </div>
       )
     }else if (this.state.location === 9) {
       return(
-        <div>
-          Werid woods: do 2 damage to any player or heal 1 for any player
+        <div className="player-data">
+          <span className="locationTitle">Werid woods</span><br/>
+          do 2 damage to any player or heal 1 for any player
           <form onChange={e=>this.handleTarget(e.target.value)}>
             <select>
               <option >--please select a target--</option>
@@ -627,8 +723,8 @@ class Login extends React.Component {
       )
     }else if (this.state.location === 10) {
       return(
-        <div>
-          Erstwhile Altar
+        <div className="player-data">
+          <span className="locationTitle">Erstwhile Altar</span><br/>
           <button type="button" onClick={this.locationEffectdone}></button><br/>
         </div>
       )
@@ -640,20 +736,24 @@ class Login extends React.Component {
           })
         }
         return(
-          <div>
-            Name:{thisPlayer.character.name}<br/>
-            Alliance:{thisPlayer.character.alliance}<br/>
-            HP:{thisPlayer.character.hp - thisPlayer.character.damage}<br/>
-            Win condition:{thisPlayer.character.win_condition}<br/>
-            Ability:{thisPlayer.character.ability}<br/>
-        </div>
+          <div className ="outer-color player-data" style={{backgroundColor:thisPlayer.color}}>
+            <div className="player-data">
+              <span className="title">Player name:</span>{thisPlayer.name}<br/>
+              <span className="title">color:</span>{thisPlayer.color}<br/>
+              <span className="title">character Name:</span>{thisPlayer.character.name}<br/>
+              <span className="title">Alliance:</span>{thisPlayer.character.alliance}<br/>
+              <span className="title">HP:</span>{thisPlayer.character.hp - thisPlayer.character.damage}<br/>
+              <span className="title">Win condition:</span>{thisPlayer.character.win_condition}<br/>
+              <span className="title">Ability:</span>{thisPlayer.character.ability}<br/>
+            </div>
+          </div>
         )
 
     }
     if(thisPlayer !== undefined){
       if(thisPlayer.character !== null && !!thisPlayer.character.hermit){
         return(
-          <div>
+          <div className="player-data">
             {thisPlayer.character.hermit}
             <button type="button" onClick={e=>this.resolveHermit(thisPlayer)}>Ok</button><br/>
           </div>
@@ -706,25 +806,32 @@ class Login extends React.Component {
 
       let otherPlayer = allPlayer.filter(player => player.id !== thisPlayer.id)
       return(
-        <div>
-        Name:{thisPlayer.character.name}<br/>
-        Alliance:{thisPlayer.character.alliance}<br/>
-        HP:{thisPlayer.character.hp - thisPlayer.character.damage}<br/>
-        Win condition:{thisPlayer.character.win_condition}<br/>
-        Ability:{thisPlayer.character.ability}<br/>
+        <div className="outer-color" style={{backgroundColor:thisPlayer.color}}>
+        <div className="player-data">
+          <span className="title">Player name:</span>{thisPlayer.name}<br/>
+          <span className="title">color:</span>{thisPlayer.color}<br/>
+          <span className="title">character Name:</span>{thisPlayer.character.name}<br/>
+          <span className="title">Alliance:</span>{thisPlayer.character.alliance}<br/>
+          <span className="title">HP:</span>{thisPlayer.character.hp - thisPlayer.character.damage}<br/>
+          <span className="title">Win condition:</span>{thisPlayer.character.win_condition}<br/>
+          <span className="title">Ability:</span>{thisPlayer.character.ability}<br/>
         <button type="button" onClick={e=>{this.moveNumber(thisPlayer)}} >Move</button><br/>
         {(thisPlayer.character.name === "Emi")?<button type="button" onClick={e=>this.specialAttack(thisPlayer)} >Special</button>:null}
         </div>
+      </div>
       )
     }else if(!!this.props.player.id && this.props.turn.id === this.props.player.id && this.state.attack === false && this.state.special === false){
       let otherPlayer = allPlayer.filter(player => player.id !== thisPlayer.id && player.character.hp > player.character.damage)
       return(
-      <div>
-        Name:{thisPlayer.character.name}<br/>
-        Alliance:{thisPlayer.character.alliance}<br/>
-        HP:{thisPlayer.character.hp - thisPlayer.character.damage}<br/>
-        Win condition:{thisPlayer.character.win_condition}<br/>
-        Ability:{thisPlayer.character.ability}<br/>
+        <div className ="outer-color" style={{backgroundColor:thisPlayer.color}}>
+      <div className="player-data">
+        <span className="title">Player name:</span>{thisPlayer.name}<br/>
+        <span className="title">color:</span>{thisPlayer.color}<br/>
+        <span className="title">character Name:</span>{thisPlayer.character.name}<br/>
+        <span className="title">Alliance:</span>{thisPlayer.character.alliance}<br/>
+        <span className="title">HP:</span>{thisPlayer.character.hp - thisPlayer.character.damage}<br/>
+        <span className="title">Win condition:</span>{thisPlayer.character.win_condition}<br/>
+        <span className="title">Ability:</span>{thisPlayer.character.ability}<br/>
             <form onChange={e=>this.handleTarget(e.target.value)} onSubmit={this.attackNumber}>
               <select>
                 <option >--please select a target--</option>
@@ -736,21 +843,25 @@ class Login extends React.Component {
                   })
                 }
               </select>
-              <input type="submit" value="attack"></input>
+              <br/><input type="submit" value="attack"></input>
             </form>
           {(thisPlayer.character.name !== "Emi")?<button type="button" onClick={e=>this.specialAttack(thisPlayer)} >Special</button>:null}
-          <button type="button" onClick={e => this.endTurn(thisPlayer)}>End trun</button><br/>
+          <button type="button" onClick={e => this.endTurn(thisPlayer)}>End turn</button><br/>
       </div>
+    </div>
       )
     }else if(!!this.props.player.id && this.props.turn.id === this.props.player.id && this.state.attack === true && this.state.special === false){
       let otherPlayer = allPlayer.filter(player => player.id !== thisPlayer.id)
       return(
-      <div>
-        Name:{thisPlayer.character.name}<br/>
-        Alliance:{thisPlayer.character.alliance}<br/>
-        HP:{thisPlayer.character.hp - thisPlayer.character.damage}<br/>
-        Win condition:{thisPlayer.character.win_condition}<br/>
-        Ability:{thisPlayer.character.ability}<br/>
+        <div className ="outer-color" style={{backgroundColor:thisPlayer.color}}>
+      <div className="player-data">
+        <span className="title">Player name:</span>{thisPlayer.name}<br/>
+        <span className="title">color:</span>{thisPlayer.color}<br/>
+        <span className="title">character Name:</span>{thisPlayer.character.name}<br/>
+        <span className="title">Alliance:</span>{thisPlayer.character.alliance}<br/>
+        <span className="title">HP:</span>{thisPlayer.character.hp - thisPlayer.character.damage}<br/>
+        <span className="title">Win condition:</span>{thisPlayer.character.win_condition}<br/>
+        <span className="title">Ability:</span>{thisPlayer.character.ability}<br/>
             <form onChange={e=>this.handleTarget(e.target.value)} onSubmit={this.attackNumber}>
               <select>
                 <option >--please select a target--</option>
@@ -764,18 +875,22 @@ class Login extends React.Component {
               </select>
             </form>
           {(thisPlayer.character.name !== "Emi")?<button type="button" onClick={e=>this.specialAttack(thisPlayer)} >Special</button>:null}
-          <button type="button" onClick={e => this.endTurn(thisPlayer)}>End trun</button><br/>
+          <button type="button" onClick={e => this.endTurn(thisPlayer)}>End turn</button><br/>
       </div>
+    </div>
       )
     }else if(!!this.props.player.id && this.props.turn.id === this.props.player.id && this.state.attack === false && this.state.special === true){
       let otherPlayer = allPlayer.filter(player => player.id !== thisPlayer.id)
       return(
-      <div>
-        Name:{thisPlayer.character.name}<br/>
-        Alliance:{thisPlayer.character.alliance}<br/>
-        HP:{thisPlayer.character.hp - thisPlayer.character.damage}<br/>
-        Win condition:{thisPlayer.character.win_condition}<br/>
-        Ability:{thisPlayer.character.ability}<br/>
+        <div className ="outer-color" style={{backgroundColor:thisPlayer.color}}>
+      <div className="player-data">
+        <span className="title">Player name:</span>{thisPlayer.name}<br/>
+        <span className="title">color:</span>{thisPlayer.color}<br/>
+        <span className="title">character Name:</span>{thisPlayer.character.name}<br/>
+        <span className="title">Alliance:</span>{thisPlayer.character.alliance}<br/>
+        <span className="title">HP:</span>{thisPlayer.character.hp - thisPlayer.character.damage}<br/>
+        <span className="title">Win condition:</span>{thisPlayer.character.win_condition}<br/>
+        <span className="title">Ability:</span>{thisPlayer.character.ability}<br/>
             <form onChange={e=>this.handleTarget(e.target.value)} onSubmit={this.attackNumber}>
               <select>
                 <option >--please select a target--</option>
@@ -789,35 +904,44 @@ class Login extends React.Component {
               </select>
               <input type="submit" value="attack"></input>
             </form>
-          <button type="button" onClick={e => this.endTurn(thisPlayer)}>End trun</button><br/>
+          <button type="button" onClick={e => this.endTurn(thisPlayer)}>End turn</button><br/>
       </div>
+    </div>
       )
     }else if(!!this.props.player.id && this.props.turn.id === this.props.player.id && this.state.attack === true && this.state.special === true){
       let otherPlayer = allPlayer.filter(player => player.id !== thisPlayer.id)
       return(
-      <div>
-        Name:{thisPlayer.character.name}<br/>
-        Alliance:{thisPlayer.character.alliance}<br/>
-        HP:{thisPlayer.character.hp - thisPlayer.character.damage}<br/>
-        Win condition:{thisPlayer.character.win_condition}<br/>
-        Ability:{thisPlayer.character.ability}<br/>
-          <button type="button" onClick={e => this.endTurn(thisPlayer)}>End trun</button><br/>
+        <div className ="outer-color" style={{backgroundColor:thisPlayer.color}}>
+      <div className="player-data">
+        <span className="title">Player name:</span>{thisPlayer.name}<br/>
+        <span className="title">color:</span>{thisPlayer.color}<br/>
+        <span className="title">character Name:</span>{thisPlayer.character.name}<br/>
+        <span className="title">Alliance:</span>{thisPlayer.character.alliance}<br/>
+        <span className="title">HP:</span>{thisPlayer.character.hp - thisPlayer.character.damage}<br/>
+        <span className="title">Win condition:</span>{thisPlayer.character.win_condition}<br/>
+        <span className="title">Ability:</span>{thisPlayer.character.ability}<br/>
+      <button type="button" onClick={e => this.endTurn(thisPlayer)}>End turn</button><br/>
       </div>
+    </div>
       )
     } else if (!!this.props.player.id && thisPlayer.character) {
       console.log(this.props.player);
       return(
-        <div>
-          Name:{thisPlayer.character.name}<br/>
-          Alliance:{thisPlayer.character.alliance}<br/>
-          HP:{thisPlayer.character.hp - thisPlayer.character.damage}<br/>
-          Win condition:{thisPlayer.character.win_condition}<br/>
-          Ability:{thisPlayer.character.ability}<br/>
+        <div className ="outer-color" style={{backgroundColor:thisPlayer.color}}>
+        <div className="player-data">
+          <span className="title">Player name:</span>{thisPlayer.name}<br/>
+          <span className="title">color:</span>{thisPlayer.color}<br/>
+          <span className="title">character Name:</span>{thisPlayer.character.name}<br/>
+          <span className="title">Alliance:</span>{thisPlayer.character.alliance}<br/>
+          <span className="title">HP:</span>{thisPlayer.character.hp - thisPlayer.character.damage}<br/>
+          <span className="title">Win condition:</span>{thisPlayer.character.win_condition}<br/>
+          <span className="title">Ability:</span>{thisPlayer.character.ability}<br/>
         </div>
+      </div>
       )
     }else{
       return(
-        <div>
+        <div className="sign">
           <form onSubmit={(e)=>{
               e.preventDefault();
               this.handleName(e.target[0].value)

@@ -17,21 +17,25 @@ class newGame extends React.Component {
       );
     }else if(this.props.players.filter(player=>player.name !== "none").length >3){
       return (
-        <div >
-          {this.props.players[0].game.id}<br/>
-        {this.props.players.map((player,current) =>{
-            return <p key={current}>{player.name}</p>
-          })}
-          <button> <Link to="/board">Start </Link></button>
+        <div className="room">
+          <div className= "names">
+            {this.props.players[0].game.id}<br/>
+            {this.props.players.map((player,current) =>{
+              return <p key={current}>{player.name}</p>
+            })}
+            <button> <Link to="/board">Start </Link></button>
+          </div>
         </div>
       );
     }else{
       return (
         <div className="room">
-          {this.props.players[0].game.id}<br/>
-        {this.props.players.map((player,current) =>{
-            return <p key={current}>{player.name}</p>
-          })}
+          <div className= "names">
+            {this.props.players[0].game.id}<br/>
+            {this.props.players.map((player,current) =>{
+              return <p key={current}>{player.name}</p>
+            })}
+          </div>
         </div>
       );
     }
