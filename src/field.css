@@ -39,3 +39,8 @@
   z-index: 1;
   width: 100%;
 }
+.player-display{
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+}
