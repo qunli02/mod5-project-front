@@ -76,10 +76,7 @@ class Login extends React.Component {
     console.log(location)
     fetch(`${API_ROOT}/api/v1/characters/${player.character.id}`, {
       method: 'PATCH',
-      headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-      },
+      headers: HEADERS,
       body: JSON.stringify({...player.character,location:location, damage:null}),
     })
     this.setState({
@@ -98,10 +95,7 @@ class Login extends React.Component {
     }).length
     fetch(`${API_ROOT}/api/v1/games/${player.game.id}`, {
       method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
+      headers: HEADERS,
       body: JSON.stringify({...player.game, wight:deadPlayer}),
     })
     }else if (player.character.name === "Vampire") {
@@ -611,10 +605,7 @@ class Login extends React.Component {
       if (Object.keys(thisWhiteCard)[0] === "1"){
         fetch(`${API_ROOT}/api/v1/games/${thisPlayer.game.id}`, {
           method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
+          headers: HEADERS,
           body: JSON.stringify({...thisPlayer.game, wight:1}),
         })
         return(
