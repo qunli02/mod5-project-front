@@ -611,10 +611,7 @@ class Login extends React.Component {
       if (Object.keys(thisWhiteCard)[0] === "1"){
         fetch(`${API_ROOT}/api/v1/games/${thisPlayer.game.id}`, {
           method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
+          headers: HEADERS,
           body: JSON.stringify({...thisPlayer.game, wight:1}),
         })
         return(
