@@ -95,10 +95,7 @@ class Login extends React.Component {
     }).length
     fetch(`${API_ROOT}/api/v1/games/${player.game.id}`, {
       method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
+      headers: HEADERS,
       body: JSON.stringify({...player.game, wight:deadPlayer}),
     })
     }else if (player.character.name === "Vampire") {
