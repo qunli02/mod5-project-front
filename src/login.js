@@ -206,10 +206,7 @@ class Login extends React.Component {
           console.log(damage);
           fetch(`${API_ROOT}/api/v1/characters/${target.character.id}`, {
             method: 'PATCH',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
+            headers: HEADERS,
             body: JSON.stringify({...target.character,damage:damage}),
           })
         })
