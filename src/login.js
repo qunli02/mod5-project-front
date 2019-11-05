@@ -108,19 +108,13 @@ class Login extends React.Component {
         let damage = Math.abs(Math.ceil(Math.random()*6)-Math.ceil(Math.random()*4))
         fetch(`${API_ROOT}/api/v1/characters/${target.character.id}`, {
           method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
+          headers: HEADERS,
           body: JSON.stringify({...target.character,damage:damage}),
         })
         if (damage !== 0){
           fetch(`${API_ROOT}/api/v1/characters/${player.character.id}`, {
             method: 'PATCH',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
+            headers: HEADERS,
             body: JSON.stringify({...player.character,damage:-2}),
           })
         }
@@ -145,10 +139,7 @@ class Login extends React.Component {
       let damage = Math.ceil(Math.random()*4)
       fetch(`${API_ROOT}/api/v1/characters/${this.state.player.character.id}`, {
         method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
+        headers: HEADERS,
         body: JSON.stringify({...player.character,damage:damage}),
       })
     }else if (player.character.name === "Unknown") {
@@ -161,10 +152,7 @@ class Login extends React.Component {
         let target = this.props.players.find(player => player.id === parseInt(this.state.person))
         fetch(`${API_ROOT}/api/v1/characters/${target.character.id}`, {
           method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
+          headers: HEADERS,
           body: JSON.stringify({...target.character,damage:7}),
         })
       }else{
@@ -179,10 +167,7 @@ class Login extends React.Component {
         let damage = Math.ceil(Math.random()*4)
         fetch(`${API_ROOT}/api/v1/characters/${target.character.id}`, {
           method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
+          headers: HEADERS,
           body: JSON.stringify({...target.character,damage:damage}),
         })
       }else{
@@ -213,10 +198,7 @@ class Login extends React.Component {
         console.log(damage);
         fetch(`${API_ROOT}/api/v1/characters/${target.character.id}`, {
           method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
+          headers: HEADERS,
           body: JSON.stringify({...target.character,damage:damage}),
         }).then(r=>r.json())
         .then(data =>{
