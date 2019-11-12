@@ -254,10 +254,7 @@ class Login extends React.Component {
       console.log(damage);
       fetch(`${API_ROOT}/api/v1/characters/${player.character.id}`, {
         method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
+        headers: HEADERS,
         body: JSON.stringify({...player.character,damage:damage}),
       })
       if (thisPlayer.character.name === "Vampire" || thisPlayer.character.name === "Charles"){
