@@ -284,10 +284,7 @@ class Login extends React.Component {
     }
     fetch(`${API_ROOT}/api/v1/games/${turn.game.id}`, {
       method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
+      headers: HEADERS,
       body: JSON.stringify({
         turn
       }),
