@@ -221,10 +221,7 @@ class Login extends React.Component {
       })
       fetch(`${API_ROOT}/api/v1/characters/${player.character.id}`, {
          method: 'PATCH',
-         headers: {
-             'Content-Type': 'application/json',
-             'Accept': 'application/json'
-         },
+         headers: HEADERS,
          body: JSON.stringify({...player.character,damage:"allie"}),
        })
     }
@@ -257,10 +254,7 @@ class Login extends React.Component {
       console.log(damage);
       fetch(`${API_ROOT}/api/v1/characters/${player.character.id}`, {
         method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
+        headers: HEADERS,
         body: JSON.stringify({...player.character,damage:damage}),
       })
       if (thisPlayer.character.name === "Vampire" || thisPlayer.character.name === "Charles"){
@@ -290,10 +284,7 @@ class Login extends React.Component {
     }
     fetch(`${API_ROOT}/api/v1/games/${turn.game.id}`, {
       method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
+      headers: HEADERS,
       body: JSON.stringify({
         turn
       }),
@@ -307,10 +298,7 @@ class Login extends React.Component {
   emiMove=(location, player)=>{
     fetch(`${API_ROOT}/api/v1/characters/${player.character.id}`, {
       method: 'PATCH',
-      headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-      },
+      headers: HEADERS,
       body: JSON.stringify({...player.character,location:location, damage:null}),
     })
     this.setState({
@@ -324,10 +312,7 @@ class Login extends React.Component {
     let target = this.props.players.find(player =>{return player.id === parseInt(playerId)})
     fetch(`${API_ROOT}/api/v1/characters/${target.character.id}`, {
       method: 'PATCH',
-      headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-      },
+      headers: HEADERS,
       body: JSON.stringify({...target.character,damage:3}),
     })
     this.setState({
