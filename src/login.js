@@ -221,10 +221,7 @@ class Login extends React.Component {
       })
       fetch(`${API_ROOT}/api/v1/characters/${player.character.id}`, {
          method: 'PATCH',
-         headers: {
-             'Content-Type': 'application/json',
-             'Accept': 'application/json'
-         },
+         headers: HEADERS,
          body: JSON.stringify({...player.character,damage:"allie"}),
        })
     }
