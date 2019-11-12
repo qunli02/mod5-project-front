@@ -312,10 +312,7 @@ class Login extends React.Component {
     let target = this.props.players.find(player =>{return player.id === parseInt(playerId)})
     fetch(`${API_ROOT}/api/v1/characters/${target.character.id}`, {
       method: 'PATCH',
-      headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-      },
+      headers: HEADERS,
       body: JSON.stringify({...target.character,damage:3}),
     })
     this.setState({
