@@ -359,10 +359,7 @@ class Login extends React.Component {
     let targetPlayer = this.props.players.find(player => player.id === parseInt(target))
       fetch(`${API_ROOT}/api/v1/characters/${targetPlayer.character.id}`, {
         method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
+        headers: HEADERS,
         body: JSON.stringify({...targetPlayer.character,hermit:hermit}),
       }).then(r=>r.json())
       .then(data=>{
