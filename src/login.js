@@ -323,10 +323,7 @@ class Login extends React.Component {
   moveAnywhere=(location,player)=>{
     fetch(`${API_ROOT}/api/v1/characters/${player.character.id}`, {
       method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
+      headers: HEADERS,
       body: JSON.stringify({...player.character,location:location, damage:null}),
     })
     this.setState({
@@ -340,19 +337,13 @@ class Login extends React.Component {
       if(action ==="damage"){
         fetch(`${API_ROOT}/api/v1/characters/${targetPlayer.character.id}`, {
           method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
+          headers: HEADERS,
           body: JSON.stringify({...targetPlayer.character,damage:2}),
         })
       }else{
         fetch(`${API_ROOT}/api/v1/characters/${targetPlayer.character.id}`, {
           method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
+          headers: HEADERS,
           body: JSON.stringify({...targetPlayer.character,damage:-1}),
         })
       }
@@ -368,10 +359,7 @@ class Login extends React.Component {
     let targetPlayer = this.props.players.find(player => player.id === parseInt(target))
       fetch(`${API_ROOT}/api/v1/characters/${targetPlayer.character.id}`, {
         method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
+        headers: HEADERS,
         body: JSON.stringify({...targetPlayer.character,hermit:hermit}),
       }).then(r=>r.json())
       .then(data=>{
@@ -388,10 +376,7 @@ class Login extends React.Component {
     }
     fetch(`${API_ROOT}/api/v1/characters/${player.character.id}`, {
       method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
+      headers: HEADERS,
       body: JSON.stringify({...player.character,damage:damage,hermit:null}),
     })
     if(this.state.underworld)
