@@ -43,20 +43,14 @@ class Login extends React.Component {
         person.name = name
         fetch(`${API_ROOT}/api/v1/players/${person.id}`, {
             method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
+            headers: HEADERS,
             body: JSON.stringify({...person}),
         })
         .then(response => response.json())
         .then(data => {
           // fetch(`${API_ROOT}/api/v1/characters/${data.character.id}`, {
           //   method: 'PATCH',
-          //   headers: {
-          //     'Content-Type': 'application/json',
-          //     'Accept': 'application/json'
-          //   },
+          //   headers: HEADERS,
           //   body: JSON.stringify({hp:10}),
           // })
           this.props.handleSelctedPlayer(data)
@@ -400,10 +394,7 @@ class Login extends React.Component {
   healing=(player, damage)=>{
     fetch(`${API_ROOT}/api/v1/characters/${player.character.id}`, {
       method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
+      headers: HEADERS,
       body: JSON.stringify({...player.character,damage:damage}),
     })
     this.setState({
@@ -437,19 +428,13 @@ class Login extends React.Component {
     if(number === 1){
       fetch(`${API_ROOT}/api/v1/characters/${thisPlayer.character.id}`, {
         method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
+        headers: HEADERS,
         body: JSON.stringify({...thisPlayer.character,damage:2}),
       }).then(r=>r.json())
       .then(data=>{
         fetch(`${API_ROOT}/api/v1/characters/${target.character.id}`, {
           method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
+          headers: HEADERS,
           body: JSON.stringify({...target.character,damage:2}),
         })
       })
@@ -468,10 +453,7 @@ class Login extends React.Component {
       .then(data=>{
         fetch(`${API_ROOT}/api/v1/characters/${thisPlayer.character.id}`, {
           method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
+          headers: HEADERS,
           body: JSON.stringify({...thisPlayer.character,damage:-1}),
         })
       })
