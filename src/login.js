@@ -43,20 +43,14 @@ class Login extends React.Component {
         person.name = name
         fetch(`${API_ROOT}/api/v1/players/${person.id}`, {
             method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
+            headers: HEADERS,
             body: JSON.stringify({...person}),
         })
         .then(response => response.json())
         .then(data => {
           // fetch(`${API_ROOT}/api/v1/characters/${data.character.id}`, {
           //   method: 'PATCH',
-          //   headers: {
-          //     'Content-Type': 'application/json',
-          //     'Accept': 'application/json'
-          //   },
+          //   headers: HEADERS,
           //   body: JSON.stringify({hp:10}),
           // })
           this.props.handleSelctedPlayer(data)
@@ -73,7 +67,6 @@ class Login extends React.Component {
       move:true
     })
     let location = Math.ceil(Math.random()*6)+Math.ceil(Math.random()*4)
-    console.log(location)
     fetch(`${API_ROOT}/api/v1/characters/${player.character.id}`, {
       method: 'PATCH',
       headers: HEADERS,
@@ -195,7 +188,6 @@ class Login extends React.Component {
         })
         let target = this.props.players.find(player=>player.id === parseInt(this.state.person))
         let damage =Math.abs(Math.ceil(Math.random()*6)-Math.ceil(Math.random()*4))
-        console.log(damage);
         fetch(`${API_ROOT}/api/v1/characters/${target.character.id}`, {
           method: 'PATCH',
           headers: HEADERS,
@@ -203,7 +195,6 @@ class Login extends React.Component {
         }).then(r=>r.json())
         .then(data =>{
           damage =Math.abs(Math.ceil(Math.random()*6)-Math.ceil(Math.random()*4))
-          console.log(damage);
           fetch(`${API_ROOT}/api/v1/characters/${target.character.id}`, {
             method: 'PATCH',
             headers: HEADERS,
@@ -249,9 +240,7 @@ class Login extends React.Component {
     }
 
     if(!!this.state.person && possible){
-      console.log(this.state.person);
       let damage =Math.abs(Math.ceil(Math.random()*6)-Math.ceil(Math.random()*4))
-      console.log(damage);
       fetch(`${API_ROOT}/api/v1/characters/${player.character.id}`, {
         method: 'PATCH',
         headers: HEADERS,
@@ -405,10 +394,7 @@ class Login extends React.Component {
   healing=(player, damage)=>{
     fetch(`${API_ROOT}/api/v1/characters/${player.character.id}`, {
       method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
+      headers: HEADERS,
       body: JSON.stringify({...player.character,damage:damage}),
     })
     this.setState({
@@ -442,19 +428,13 @@ class Login extends React.Component {
     if(number === 1){
       fetch(`${API_ROOT}/api/v1/characters/${thisPlayer.character.id}`, {
         method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
+        headers: HEADERS,
         body: JSON.stringify({...thisPlayer.character,damage:2}),
       }).then(r=>r.json())
       .then(data=>{
         fetch(`${API_ROOT}/api/v1/characters/${target.character.id}`, {
           method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
+          headers: HEADERS,
           body: JSON.stringify({...target.character,damage:2}),
         })
       })
@@ -473,10 +453,7 @@ class Login extends React.Component {
       .then(data=>{
         fetch(`${API_ROOT}/api/v1/characters/${thisPlayer.character.id}`, {
           method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
+          headers: HEADERS,
           body: JSON.stringify({...thisPlayer.character,damage:-1}),
         })
       })
@@ -496,7 +473,6 @@ class Login extends React.Component {
 
 
   render(){
-    console.log(this.props);
     let thisPlayer = this.props.players.find(player => player.id === this.props.player.id)
     let allPlayer = this.props.players.filter(player => player.name !== "none")
     let alivePlayer;
@@ -865,7 +841,6 @@ class Login extends React.Component {
     </div>
       )
     } else if (!!this.props.player.id && thisPlayer.character) {
-      console.log(this.props.player);
       return(
         <div className ="outer-color" style={{backgroundColor:thisPlayer.color}}>
         <div className="player-data">
