@@ -6,7 +6,6 @@ class action extends React.Component {
   moveNumber=(e)=>{
 
     let location = Math.ceil(Math.random()*6)+Math.ceil(Math.random()*4)
-    console.log(location)
     if (location === 7){
     }
     e.target.disabled = true
@@ -16,7 +15,6 @@ class action extends React.Component {
   }
 
   attackNumber=(e)=>{
-    console.log(Math.abs(Math.ceil(Math.random()*6)-Math.ceil(Math.random()*4)));
     e.target.disabled = true
   }
 
@@ -24,7 +22,6 @@ class action extends React.Component {
   render(){
     // TODO; you need to update PLAYER reducer case because this.props.player is null right now.
     // <h1>{this.props.player.name} turn</h1><br/>
-    console.log(this.props.player);
     return(
       <div>
         <button type="button" onClick={this.moveNumber} >Move</button><br/>

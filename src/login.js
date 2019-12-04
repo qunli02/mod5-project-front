@@ -169,7 +169,7 @@ class Login extends React.Component {
     }else if (player.character.name === "Gregor") {
     }else if (player.character.name === "Emi") {
       if (player.character.location === null){
-        alert("Cannot use on turn 1")
+        alert("Cannot use on turn one!")
       }else{
         this.setState({
           emi:true,
@@ -255,7 +255,7 @@ class Login extends React.Component {
         attack:true
       })
     }else{
-      alert("Target Not in range")
+      alert("Target not in range")
     }
   }
 
@@ -380,10 +380,7 @@ class Login extends React.Component {
     let damage = -Math.ceil(Math.random()*6)
     fetch(`${API_ROOT}/api/v1/characters/${player.character.id}`, {
       method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
+      headers: HEADERS,
       body: JSON.stringify({...player.character,damage:damage}),
     })
     this.setState({
@@ -444,10 +441,7 @@ class Login extends React.Component {
     }else if(number === 2){
       fetch(`${API_ROOT}/api/v1/characters/${target.character.id}`, {
         method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
+        headers: HEADERS,
         body: JSON.stringify({...target.character,damage:2}),
       }).then(r=>r.json())
       .then(data=>{
