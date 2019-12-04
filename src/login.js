@@ -441,10 +441,7 @@ class Login extends React.Component {
     }else if(number === 2){
       fetch(`${API_ROOT}/api/v1/characters/${target.character.id}`, {
         method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
+        headers: HEADERS,
         body: JSON.stringify({...target.character,damage:2}),
       }).then(r=>r.json())
       .then(data=>{
