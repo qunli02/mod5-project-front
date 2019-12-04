@@ -169,7 +169,7 @@ class Login extends React.Component {
     }else if (player.character.name === "Gregor") {
     }else if (player.character.name === "Emi") {
       if (player.character.location === null){
-        alert("Cannot use on turn 1")
+        alert("Cannot use on turn one!")
       }else{
         this.setState({
           emi:true,
