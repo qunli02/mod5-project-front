@@ -255,7 +255,7 @@ class Login extends React.Component {
         attack:true
       })
     }else{
-      alert("Target Not in range")
+      alert("Target not in range")
     }
   }
 
