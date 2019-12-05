@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import { connect } from "react-redux"
-import { API_ROOT } from './constants';
+import { API_ROOT, HEADERS } from './constants';
 import "./login.css"
 
 
