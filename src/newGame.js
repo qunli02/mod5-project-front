@@ -1,39 +1,47 @@
-import React from 'react'
+import React from "react";
 
-import { connect } from "react-redux"
+import { connect } from "react-redux";
 
 import { Link } from "react-router-dom";
-import "./newgame.css"
+import "./newgame.css";
 
 class newGame extends React.Component {
-
-  render(){
+  render() {
     console.log(this.props);
-    if (this.props.state.game === false){
+    if (this.props.state.game === false) {
       return (
         <div className="newgame">
-            <button className="button" onClick={this.props.handleGame}>New Game</button>
+          <button className="button" onClick={this.props.handleGame}>
+            New Game
+          </button>
         </div>
       );
-    }else if(this.props.players.filter(player=>player.name !== "none").length >3){
+    } else if (
+      this.props.players.filter((player) => player.name !== "none").length > 3
+    ) {
       return (
         <div className="room">
-          <div className= "names">
-            {this.props.players[0].game.id}<br/>
-            {this.props.players.map((player,current) =>{
-              return <p key={current}>{player.name}</p>
+          <div className="names">
+            {this.props.game?.id}
+            <br />
+            {this.props.players.map((player, current) => {
+              return <p key={current}>{player.name}</p>;
             })}
-            <button> <Link to="/board">Start </Link></button>
+            <button>
+              {" "}
+              <Link to="/board">Start </Link>
+            </button>
           </div>
         </div>
       );
-    }else{
+    } else {
       return (
         <div className="room">
-          <div className= "names">
-            {this.props.players[0].game.id}<br/>
-            {this.props.players.map((player,current) =>{
-              return <p key={current}>{player.name}</p>
+          <div className="names">
+            {this.props.game?.id}
+            <br />
+            {this.props.players.map((player, current) => {
+              return <p key={current}>{player.name}</p>;
             })}
           </div>
         </div>
@@ -42,18 +50,16 @@ class newGame extends React.Component {
   }
 }
 
-
-function msp(state){
+function msp(state) {
   return {
     players: state.players,
     room: state.room,
-    turn: state.turn
-  }
+    turn: state.turn,
+  };
 }
 
 function mdp(dispatch) {
-  return{
-  }
+  return {};
 }
 
-export default connect(msp,mdp)(newGame);
+export default connect(msp, mdp)(newGame);

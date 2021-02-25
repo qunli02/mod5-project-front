@@ -1,30 +1,26 @@
-body{
-  background-color:#2e2e2e;
+body {
+  background-color: #2e2e2e;
 }
 
 .newgame {
- background-image: url("https://i3.wp.com/i.pinimg.com/736x/8e/02/d1/8e02d19ae5ed814d24f93d152fdaee4e--shadow-hunters-board-games.jpg");
- background-repeat: no-repeat;
- background-color: #cccccc;
- height: 100vh;
- position: absolute;
- left: 50%;
- transform: translate(-50%);
- width: 53vw;
-}
-
-
-.room{
   background-image: url("https://i3.wp.com/i.pinimg.com/736x/8e/02/d1/8e02d19ae5ed814d24f93d152fdaee4e--shadow-hunters-board-games.jpg");
   background-repeat: no-repeat;
-  position: absolute;
+  background-color: #cccccc;
+  background-position: center;
   height: 100vh;
-  left: 50%;
-  transform: translate(-50%);
-  width: 53vw;
+  width: 100vw;
 }
 
-.names{
+.room {
+  background-image: url("https://i3.wp.com/i.pinimg.com/736x/8e/02/d1/8e02d19ae5ed814d24f93d152fdaee4e--shadow-hunters-board-games.jpg");
+  background-repeat: no-repeat;
+  background-color: #cccccc;
+  background-position: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.names {
   background-color: white;
   position: absolute;
   left: 50%;
